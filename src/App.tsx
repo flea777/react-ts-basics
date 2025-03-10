@@ -1,35 +1,101 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import Header from './components/Header'
+import Post from './components/Post'
+import Sidebar from './components/Sidebar'
+
+import styles from './App.module.css'
+
+import './global.css'
+
+const posts = [
+  {
+    id: 1,
+    author: {
+      avatarUrl: 'https://github.com/flea777.png',
+      name: 'Pedro Bim',
+      role: 'Software Developer @ Cesar School'
+    },
+    content: [
+      { type: 'paragraph', 
+        content: 'Boa noite!! 👋'
+      },
+      { type: 'paragraph', 
+        content: 'Continuando meu aprendizado de React.js com a trilha da Rocketseat!!'
+      },
+      {
+        type: 'link',
+        content: 'https://github.com/flea777'
+      }  
+    ],
+    publishedAt: new Date('2025-03-01 20:07:58')
+  },
+  {
+    id: 2,
+    author: {
+      avatarUrl: 'https://github.com/liv553.png',
+      name: 'Lívia Almeida',
+      role: 'Software Developer @ Cesar School'
+    },
+    content: [
+      { type: 'paragraph', 
+        content: 'Oie! 👋'
+      },
+      { type: 'paragraph', 
+        content: 'Neste momento aprimorando minha base na linguagem C para a cadeira de programação imperativa e funcional na faculdade!'
+      },
+      {
+        type: 'link',
+        content: 'https://github.com/liv553'
+      }  
+    ],
+    publishedAt: new Date('2025-03-03 20:07:58')
+  },
+  {
+    id: 3,
+    author: {
+      avatarUrl: 'https://github.com/yuricsg.png',
+      name: 'Yuri França',
+      role: 'Software Developer @ Cesar School'
+    },
+    content: [
+      { type: 'paragraph', 
+        content: 'Olá! 👋'
+      },
+      { type: 'paragraph', 
+        content: 'Continuando meu aprendizado de Desenvolvimento web no curso Spring Boot Expert do Dougllas Sousa!'
+      },
+      {
+        type: 'link',
+        content: 'https://github.com/yuricsg'
+      }  
+    ],
+    publishedAt: new Date('2025-03-03 20:07:58')
+  },
+]
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div>
+      <Header />
+      <div className={styles.wrapper}>
+        <Sidebar />
+
+        <main>
+          {posts.map(post => {
+            return (
+              <Post 
+                key={post.id}
+                author={post.author}
+                content={post.content}
+                publishedAt={post.publishedAt}
+              />
+            )
+          })}
+        </main>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    </div>
   )
 }
 
 export default App
+
